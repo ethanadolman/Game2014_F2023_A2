@@ -11,6 +11,8 @@ public class PlayerBehavior : MonoBehaviour
     public Transform _spawn;
     [SerializeField]
     public int _lives = 3;
+    [SerializeField]
+    public int _level = 1;
 
     [SerializeField]
     float _walkSpeed = 5;
@@ -19,7 +21,7 @@ public class PlayerBehavior : MonoBehaviour
     float _maxSpeed = 20;
 
     [SerializeField]
-    float _jumpForceAmount = 100;
+    float _jumpForceAmount = 30;
 
     [SerializeField]
     Transform _groundPoint;
@@ -160,6 +162,31 @@ public class PlayerBehavior : MonoBehaviour
             transform.localScale = Vector3.one;
     }
 
+    public void ChangeLevel(int level)
+    {
+        _level = level;
+        switch (level)
+        {
+            case 1:
+                _spawn.position = Vector3.zero;
+                break;
+            case 2:
+                _spawn.position = new Vector3(72, 0, 0);
+                break;
+            case 3:
+                _spawn.position = new Vector3(150, 0, 0);
+                break;
+            case 4:
+                _spawn.position = Vector3.zero;
+                SceneManager.LoadScene("Menu");
+                break;
+            default:
+                _spawn.position = Vector3.zero;
+                break;
+        }
+
+        transform.position = _spawn.position;
+    }
     private void OnDrawGizmos()
     {
         Debug.DrawLine(_groundPoint.position,Vector3.down * .1f + _groundPoint.position);

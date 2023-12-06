@@ -7,7 +7,8 @@ public class HazardBehavior : MonoBehaviour
     public enum HazardType {FallingPlatfrom, HorizontalMovingPlatform, Fake}
 
     [SerializeField] private Rigidbody2D rb;
-    [SerializeField]
+
+    private bool enableFall;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,14 +18,14 @@ public class HazardBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(enableFall) StartCoroutine(ToggleGravity(1f));
     }
 
     void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            StartCoroutine(ToggleGravity(1f));
+            enableFall = true;
         }
     }
 

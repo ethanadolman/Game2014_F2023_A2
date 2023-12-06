@@ -9,9 +9,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private TextMeshProUGUI livesText;
     [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI levelText;
     private int lives;
     private int score;
-
+    private int level;
     void Start()
     {
         lives = player.GetComponent<PlayerBehavior>()._lives;
@@ -26,5 +27,8 @@ public class UIManager : MonoBehaviour
         }
         lives = player.GetComponent<PlayerBehavior>()._lives;
         livesText.text =  $"Lives Left: {lives}";
+
+        level = player.GetComponent<PlayerBehavior>()._level;
+        levelText.text = $"Level: {level}";
     }
 }
