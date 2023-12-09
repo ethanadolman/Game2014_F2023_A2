@@ -11,20 +11,22 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI levelText;
     private int lives;
+    private int coinsCollected;
     private int score;
     private int level;
     void Start()
     {
         lives = player.GetComponent<PlayerBehavior>()._lives;
+        coinsCollected = player.GetComponent<PlayerBehavior>()._coinsCollected;
     }
     void Update()
     {
         if (score < (int)player.transform.position.x)
         {
             score = (int)player.transform.position.x;
-            scoreText.text =  $"Score: {score}";
-            
         }
+        coinsCollected = player.GetComponent<PlayerBehavior>()._coinsCollected;
+        scoreText.text = $"Score: {score+(coinsCollected*10)}";
         lives = player.GetComponent<PlayerBehavior>()._lives;
         livesText.text =  $"Lives Left: {lives}";
 

@@ -35,6 +35,7 @@ public class PlayerBehavior : MonoBehaviour
     float _tresholdForJump = .3f;
 
     float _airFactor = .3f;
+    public int _coinsCollected = 0;
 
     bool _isGrounded = false;
 
@@ -190,5 +191,14 @@ public class PlayerBehavior : MonoBehaviour
     private void OnDrawGizmos()
     {
         Debug.DrawLine(_groundPoint.position,Vector3.down * .1f + _groundPoint.position);
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Coin"))
+        {
+            Destroy(other.gameObject);
+            _coinsCollected++;
+        }
     }
 }
